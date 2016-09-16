@@ -85,7 +85,7 @@ function init()
             //alert(hash);
             if (hash === "#")
             {
-                window.location.replace("tooter.azurewebsites.net/hashsearch.php?hashword="+res);
+                window.location.replace("/hashsearch.php?hashword="+res);
                 
             }
             else
