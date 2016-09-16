@@ -85,7 +85,8 @@ function init()
             //alert(hash);
             if (hash === "#")
             {
-                window.location.replace("http://tooter.azurewebsites.net/hashsearch.php?hashword="+res);
+                console.log(5 + 6);
+                window.location.replace("http://stackoverflow.com");
                 
             }
             else
