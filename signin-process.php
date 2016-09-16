@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         session_start();
         $_SESSION['login'] = "";
         $_SESSION['error'] = "1";
-        echo "woo";
-        //header("location: signin.php");
+        //echo"woo";
+        header("location: signin.php");
     }
 
 }

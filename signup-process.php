@@ -109,7 +109,7 @@ include 'connectDB.php';
                                 $_SESSION['logintest'] = "1";
                                 header('location:signin.php');
                             }
-							}
+			}
                     } 
                 ?>
                 <button type="submit" id="btn-create" class="">Create my account</button>
