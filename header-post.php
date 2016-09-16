@@ -96,7 +96,7 @@ HEADER TO DISPLAY AFTER LOGGING IN
                 </div>
                 
             </form>
-            <button id="searchsub" class="btn btn-default">Submit</button>
+            
             <?php
                     }
                     ?>
