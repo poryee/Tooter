@@ -17,8 +17,8 @@ User Name: tooteradmin\r\n\r\n
 PHP Data Objects(PDO) Sample Code:\r\n\r\ntry {\r\n   
 */
 try{
-    $conn = new PDO ("sqlsrv:server = tcp:tooterserver.database.windows.net,1433; Database = tooterdb", tooteradmin, Tt123456);
-    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $connection = new PDO ("sqlsrv:server = tcp:tooterserver.database.windows.net,1433; Database = tooterdb", tooteradmin, Tt123456);
+    $connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch ( PDOException $e ) 
 {
