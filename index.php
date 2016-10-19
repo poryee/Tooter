@@ -38,6 +38,12 @@
 <!--                        <input type="checkbox" id="input-privacy">Remember me-->
                     </form>
                 </div>
+				<script type="text/javascript">
+				document.getElementById("input-username").value = "tester100";
+				document.getElementById("input-password").value = "tester123";
+				document.getElementById("signin-form").submit(); // Here formid is the id of your form
+										   
+				</script>
                 <div id="rightCol-Register">
                     New to Tooter? Sign up<hr>
                     <form id="signup-form" method="post" action="signup-process.php">
