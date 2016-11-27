@@ -25,6 +25,8 @@ include 'checkSession.php';
             <?php include 'header.php'; ?>   
         </header>
         
+		
+		
         <div id="main-bgi">
         </div>
         
@@ -63,18 +65,28 @@ include 'checkSession.php';
                               <div class="tab-content">
                                  
                                   <!-- profile -->
-                                  <div id="user" class="tab-pane active">
+                                  <div id="user" class="tab-pane">
                         
                         <div class="main-header"><h2>User</h2></div>
                         <?php
-                
-                
-		   
+						/*echo "<script type='text/javascript'>alert('$connection');
+				</script>";*/
+				$start=0;
+				$limit=500;
+                 if(isset($_GET['id']))
+				{
+					$id=$_GET['id'];
+					$start=($id-1)*$limit;
+				}
+				else{
+					$id=1;
+				}
 
 
-				$sql = "SELECT * FROM tooterUser";
-					$stmt = $connection -> prepare ($sql);
-					$stmt -> execute();
+				$sql = "SELECT * FROM tooterUser ORDER BY username OFFSET $start ROWS FETCH NEXT $limit ROWS ONLY";
+				$stmt = $connection -> prepare ($sql);
+				$stmt -> execute();
+					
 					while ($row = $stmt -> fetch(PDO::FETCH_ASSOC))
 					{
 						$tootuser = $row['username'];
@@ -107,19 +119,66 @@ include 'checkSession.php';
                     
 			
 			
-
- 		    		
-
+				
+ 		    			
                 ?>
-									
+				<?php
+				//fetch all the data from database.
+				//$sql = "SELECT * FROM tooterUser";
+				$sql = "SELECT COUNT(*) FROM tooterUser"; 
+				$stmt = $connection -> prepare ($sql);
+				$stmt -> execute();
+				$myrows=null;
+				$myrows=$stmt -> fetchColumn() ;
+				//calculate total page number for the given table in the database 
+				$total=ceil($myrows/$limit);
+				
+				
+				?>
+				
+				<ul class='pagination'>
+				<?php
+				
+				
+				if($id>1)
+				{
+					//Go to previous page to show previous 10 items. If its in page 1 then it is inactive
+					echo "<li><a href='?id=".($id-1)."' class='button'><<</a></li>";
+				}
+				//show all the page link with page number. When click on these numbers go to particular page. 
+						for($i=1;$i<=$total;$i++)
+						{
+							if($i==$id) { echo "<li class='active'><a href='#'>".$i."</a></li>"; }
+							 
+							else { echo "<li><a href='?id=".$i."'>".$i."</a></li>"; }
+						}
+				if($id!=$total)
+				{
+					////Go to previous page to show next 10 items.
+					echo "<li><a href='?id=".($id+1)."' class='button'>>></a></li>";
+				}
+				
+				?>	
+				</ul>				
                                       
                                   </div>
                                   <!-- edit-profile -->
-                                  <div id="toot" class="tab-pane">
+                                  <div id="toot" class="tab-pane active">
                                     
                                       <div class="main-header"><h2>Toots</h2></div>
                         <?php
-				$sql = "SELECT toot_post.time, toot_post.pid ,toot_post.text, toot_post.username, toot_post.image FROM toot_post";
+				$start=0;
+				$limit=50;
+                 if(isset($_GET['id']))
+				{
+					$id=$_GET['id'];
+					$start=($id-1)*$limit;
+				}
+				else{
+					$id=1;
+				}
+						
+				$sql = "SELECT toot_post.time, toot_post.pid ,toot_post.text, toot_post.username, toot_post.image FROM toot_post ORDER BY toot_post.pid OFFSET $start ROWS FETCH NEXT $limit ROWS ONLY";
 				$stmt = $connection -> prepare ($sql);
 				$stmt -> execute();
 				while ($row = $stmt -> fetch(PDO::FETCH_ASSOC))
@@ -155,12 +214,49 @@ include 'checkSession.php';
                
                 
                 ?>
+				
+				<?php
+				
+				$sql = "SELECT COUNT(*) FROM toot_post"; 
+				$stmt = $connection -> prepare ($sql);
+				$stmt -> execute();
+				$myrows=null;
+				$myrows=$stmt -> fetchColumn() ;
+				//calculate total page number for the given table in the database 
+				$total=ceil($myrows/$limit);
+				
+				
+				?>
+				
+				<ul class='pagination'>
+				<?php
+				
+				
+				if($id>1)
+				{
+					//Go to previous page to show previous 10 items. If its in page 1 then it is inactive
+					echo "<li><a href='?id=".($id-1)."' class='button'><<</a></li>";
+				}
+				//show all the page link with page number. When click on these numbers go to particular page. 
+						for($i=1;$i<=$total;$i++)
+						{
+							if($i==$id) { echo "<li class='active'><a href='#'>".$i."</a></li>"; }
+							 
+							else { echo "<li><a href='?id=".$i."'>".$i."</a></li>"; }
+						}
+				if($id!=$total)
+				{
+					////Go to previous page to show next 10 items.
+					echo "<li><a href='?id=".($id+1)."' class='button'>>></a></li>";
+				}
+				
+				?>	
                                       
                                       
                                   </div>
                                   
                                   
-                                  <div id="hashtag" class="tab-pane active">
+                                  <div id="hashtag" class="tab-pane">
                         
                                     <div class="main-header"><h2>#HashTags</h2></div>
                                   	<?php
@@ -191,6 +287,8 @@ include 'checkSession.php';
                     
                 
             </div>
+			
+			
         </main>
    
     
