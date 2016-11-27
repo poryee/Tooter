@@ -163,12 +163,12 @@ include 'checkSession.php';
                                       
                                   </div>
                                   <!-- edit-profile -->
-                                  <div id="toot" class="tab-pane active">
+                                  <div id="toot" class="tab-pane">
                                     
                                       <div class="main-header"><h2>Toots</h2></div>
                         <?php
 				$start=0;
-				$limit=50;
+				$limit=5000;
                  if(isset($_GET['id']))
 				{
 					$id=$_GET['id'];
