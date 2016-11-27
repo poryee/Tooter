@@ -65,7 +65,7 @@ include 'checkSession.php';
                               <div class="tab-content">
                                  
                                   <!-- profile -->
-                                  <div id="user" class="tab-pane">
+                                  <div id="user" class="tab-pane active">
                         
                         <div class="main-header"><h2>User</h2></div>
                         <?php
